@@ -109,24 +109,25 @@ void TDicionario_Insere(TArvBin *pRaiz, TItem x)
     (*pRaiz)->cor = 0; // a raiz é negra
 }
 
-int TDicionario_Pesquisa(TArvBin No, TChave x)
+int TDicionario_Pesquisa(TArvBin No, int x)
 {
-    if (No == NULL)
-        return 0; // elemento não encontrado
-
-    counter_comparacao++;
-    if (x == No->Item.Chave)
+    while (No != NULL)
     {
-        return 1; // elemento encontrado
+        counter_comparacao++;
+        if (x == No->Item.Chave)
+        {
+            return 1; // elemento encontrado
+        }
+        else if (x < No->Item.Chave)
+        {
+            No = No->Esq; // busca na subárvore esquerda
+        }
+        else
+        {
+            No = No->Dir; // busca na subárvore direita
+        }
     }
-    else if (x < No->Item.Chave)
-    {
-        return TDicionario_Pesquisa(No->Esq, x);
-    }
-    else
-    {
-        return TDicionario_Pesquisa(No->Dir, x);
-    }
+    return 0; // elemento não encontrado
 }
 
 void Sucessor(TArvBin *q, TArvBin *r)
@@ -249,11 +250,6 @@ int main(int argc, char *argv[])
 
     // Plotar resultados de inserção
     printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u\n", cpu_time_used, counter_comparacao);
-
-    // Imprimir estado do Dicionario após inserção
-    printf("Dicionario apos insercao: ");
-    printInOrder(dicionario);
-    printf("\n");
 
     // Reset counters for search
     counter_comparacao = 0;
