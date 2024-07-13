@@ -10,7 +10,6 @@
 // GLOBAL    //
 ///////////////
 unsigned int counter_comparacao = 0;
-unsigned int counter_movimentacao = 0;
 
 ///////////////
 // ALGORITMO //
@@ -109,7 +108,6 @@ void Predecessor(TArvBin *q, TArvBin *r)
         (*q)->Item = (*r)->Item;
         *q = *r;
         *r = (*r)->Esq;
-        counter_movimentacao++;
     }
 }
 
@@ -122,7 +120,6 @@ void Sucessor(TArvBin *q, TArvBin *r)
         (*q)->Item = (*r)->Item;
         *q = *r;
         *r = (*r)->Dir;
-        counter_movimentacao++;
     }
 }
 
@@ -148,7 +145,7 @@ int Retira(TArvBin *pRaiz, TChave c)
         else
             Sucessor(&q, &q->Dir);
         free(q);
-        counter_movimentacao++;
+
         return 1;
     }
     return 0; // retorna 0 caso o item não esteja na árvore
@@ -218,11 +215,10 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de inserção
-    printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u; REGIS_INSERCAO=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u\n", cpu_time_used, counter_comparacao);
 
     // Reset counters for search
     counter_comparacao = 0;
-    counter_movimentacao = 0;
 
     // Rodar algoritmo de busca no dicionário
     start = clock();
@@ -234,11 +230,10 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de busca
-    printf("TEMPO_BUSCA=%f; COMP_BUSCA=%u; REGIS_BUSCA=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_BUSCA=%f; COMP_BUSCA=%u\n", cpu_time_used, counter_comparacao);
 
     // Reset counters for delete
     counter_comparacao = 0;
-    counter_movimentacao = 0;
 
     // Rodar algoritmo de remoção no dicionário
     start = clock();
@@ -250,7 +245,7 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de remoção
-    printf("TEMPO_REMOCAO=%f; COMP_REMOCAO=%u; REGIS_REMOCAO=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_REMOCAO=%f; COMP_REMOCAO=%u\n", cpu_time_used, counter_comparacao);
 
     // Liberar memória
     free(dicionario);

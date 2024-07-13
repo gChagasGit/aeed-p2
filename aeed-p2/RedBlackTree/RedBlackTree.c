@@ -8,7 +8,6 @@
 // GLOBAL    //
 ///////////////
 unsigned int counter_comparacao = 0;
-unsigned int counter_movimentacao = 0;
 
 ///////////////
 // ALGORITMO //
@@ -142,7 +141,6 @@ void Sucessor(TArvBin *q, TArvBin *r)
         (*q)->Item = (*r)->Item;
         *q = *r;
         *r = (*r)->Dir;
-        counter_movimentacao++;
     }
 }
 
@@ -182,7 +180,6 @@ int RetiraRecursivo(TArvBin *p, TChave x)
             Sucessor(&q, &q->Dir);
             free(q);
         }
-        counter_movimentacao++;
     }
     return 1;
 }
@@ -251,7 +248,7 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de inserção
-    printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u; REGIS_INSERCAO=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u\n", cpu_time_used, counter_comparacao);
 
     // Imprimir estado do Dicionario após inserção
     printf("Dicionario apos insercao: ");
@@ -260,7 +257,6 @@ int main(int argc, char *argv[])
 
     // Reset counters for search
     counter_comparacao = 0;
-    counter_movimentacao = 0;
 
     // Rodar algoritmo de busca no dicionário
     start = clock();
@@ -272,11 +268,10 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de busca
-    printf("TEMPO_BUSCA=%f; COMP_BUSCA=%u; REGIS_BUSCA=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_BUSCA=%f; COMP_BUSCA=%u\n", cpu_time_used, counter_comparacao);
 
     // Reset counters for delete
     counter_comparacao = 0;
-    counter_movimentacao = 0;
 
     // Rodar algoritmo de remoção no dicionário
     start = clock();
@@ -288,7 +283,7 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de remoção
-    printf("TEMPO_REMOCAO=%f; COMP_REMOCAO=%u; REGIS_REMOCAO=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_REMOCAO=%f; COMP_REMOCAO=%u\n", cpu_time_used, counter_comparacao);
 
     // Liberar memória
     free(point);

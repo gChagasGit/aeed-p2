@@ -10,7 +10,6 @@
 // GLOBAL    //
 ///////////////
 unsigned int counter_comparacao = 0;
-unsigned int counter_movimentacao = 0;
 
 ///////////////
 // ALGORITMO //
@@ -78,7 +77,7 @@ int TDicionario_Insere(TDicionario *D, TItem x)
     }
 
     D->Item[D->n++] = x; // n é o tamanho
-    counter_movimentacao++;
+
     return 1;
 }
 
@@ -90,7 +89,7 @@ int TDicionario_Retira(TDicionario *D, TChave c)
     if (i == NIL)
         return 0;                 // retorna 0 caso o item não esteja no dicionário
     D->Item[i] = D->Item[--D->n]; // n é o tamanho
-    counter_movimentacao++;
+
     if (4 * D->n == D->max)
     {
         D->max /= 2;
@@ -152,7 +151,7 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de inserção
-    printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u; REGIS_INSERCAO=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u\n", cpu_time_used, counter_comparacao);
 
     // Imprimir estado do Dicionario apos inserção
     printf("Dicionario apos insercao: (n=%d) ", dicionario->n);
@@ -160,7 +159,6 @@ int main(int argc, char *argv[])
 
     // Reset counters for search
     counter_comparacao = 0;
-    counter_movimentacao = 0;
 
     // Rodar algoritmo de busca no dicionário
     start = clock();
@@ -172,11 +170,10 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de busca
-    printf("TEMPO_BUSCA=%f; COMP_BUSCA=%u; REGIS_BUSCA=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_BUSCA=%f; COMP_BUSCA=%u\n", cpu_time_used, counter_comparacao);
 
     // Reset counters for delete
     counter_comparacao = 0;
-    counter_movimentacao = 0;
 
     // Rodar algoritmo de remoção no dicionário
     start = clock();
@@ -188,7 +185,7 @@ int main(int argc, char *argv[])
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de remoção
-    printf("TEMPO_REMOCAO=%f; COMP_REMOCAO=%u; REGIS_REMOCAO=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_REMOCAO=%f; COMP_REMOCAO=%u\n", cpu_time_used, counter_comparacao);
 
     // // Imprimir estado do Dicionario apos remoção
     printf("Dicionario apos remocao: (n=%d)", dicionario->n);
