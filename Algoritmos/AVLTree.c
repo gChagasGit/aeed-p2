@@ -1,4 +1,4 @@
-// Código modelo para AVLTree
+// Código para AVLTree
 
 typedef int TChave;
 
@@ -21,14 +21,12 @@ int Altura(TArvBin No)
 {
     int hEsq, hDir;
     if (No == NULL)
-        return -1; // altura de arvore vazia e -1
+        return -1; // altura de árvore vazia é -1
     hEsq = Altura(No->Esq);
     hDir = Altura(No->Dir);
-    if (hEsq > hDir)
-        return hEsq + 1;
-    else
-        return hDir + 1;
+    return (hEsq > hDir) ? hEsq + 1 : hDir + 1;
 }
+
 int FB(TArvBin No)
 {
     if (No == NULL)
@@ -36,27 +34,9 @@ int FB(TArvBin No)
     return Altura(No->Esq) - Altura(No->Dir);
 }
 
-int ArvoreAVL(TArvBin No)
-{
-    int fb;
-    if (No == NULL)
-        return 1;
-    if (!ArvoreAVL(No->Esq))
-        return 0;
-    if (!ArvoreAVL(No->Dir))
-        return 0;
-    fb = FB(No);
-    if ((fb > 1) || (fb < -1))
-        return 0;
-    else
-        return 1;
-}
-
 void LL(TArvBin *pA)
 {
-    TArvBin pB;
-
-    pB = (*pA)->Esq;
+    TArvBin pB = (*pA)->Esq;
     (*pA)->Esq = pB->Dir;
     pB->Dir = *pA;
     if (pB->fb == 0)
@@ -74,9 +54,7 @@ void LL(TArvBin *pA)
 
 void RR(TArvBin *pA)
 {
-    TArvBin pB;
-
-    pB = (*pA)->Dir;
+    TArvBin pB = (*pA)->Dir;
     (*pA)->Dir = pB->Esq;
     pB->Esq = *pA;
     if (pB->fb == 0)
@@ -94,10 +72,8 @@ void RR(TArvBin *pA)
 
 void LR(TArvBin *pA)
 {
-    TArvBin pB, pC;
-
-    pB = (*pA)->Esq;
-    pC = pB->Dir;
+    TArvBin pB = (*pA)->Esq;
+    TArvBin pC = pB->Dir;
     pB->Dir = pC->Esq;
     pC->Esq = pB;
     (*pA)->Esq = pC->Dir;
@@ -116,10 +92,8 @@ void LR(TArvBin *pA)
 
 void RL(TArvBin *pA)
 {
-    TArvBin pB, pC;
-
-    pB = (*pA)->Dir;
-    pC = pB->Esq;
+    TArvBin pB = (*pA)->Dir;
+    TArvBin pC = pB->Esq;
     pB->Esq = pC->Dir;
     pC->Dir = pB;
     (*pA)->Dir = pC->Esq;
@@ -201,7 +175,7 @@ int Insere(TArvBin *pNo, TItem x)
     {
         if (Insere(&(*pNo)->Esq, x))
             switch ((*pNo)->fb)
-            { // subarvore esquerda cresceu
+            {
             case -1:
                 (*pNo)->fb = 0;
                 return 0;
@@ -217,7 +191,7 @@ int Insere(TArvBin *pNo, TItem x)
     {
         if (Insere(&(*pNo)->Dir, x))
             switch ((*pNo)->fb)
-            { // subarvore direita cresceu
+            {
             case +1:
                 (*pNo)->fb = 0;
                 return 0;
@@ -230,15 +204,7 @@ int Insere(TArvBin *pNo, TItem x)
         return 0;
     }
     else
-        return 0; // retorna 0 caso o item ja estiver na arvore
-}
-
-int FB(TArvBin No)
-{
-    if (No == NULL)
-        return 0;
-
-    return No->fb;
+        return 0; // retorna 0 caso o item já estiver na árvore
 }
 
 int Retira(TArvBin *p, TChave c)
@@ -246,12 +212,12 @@ int Retira(TArvBin *p, TChave c)
     TArvBin q;
     int ret;
     if (*p == NULL)
-        return 0; // retorna 0 caso o item nao esteja na arvore
+        return 0; // retorna 0 caso o item não esteja na árvore
     else if (c < (*p)->Item.Chave)
     {
         if (Retira(&(*p)->Esq, c))
             switch ((*p)->fb)
-            { // subarvore esquerda encolheu
+            {
             case +1:
                 (*p)->fb = 0;
                 return 1;
@@ -267,7 +233,7 @@ int Retira(TArvBin *p, TChave c)
     {
         if (Retira(&(*p)->Dir, c))
             switch ((*p)->fb)
-            { // subarvore direita encolheu
+            {
             case -1:
                 (*p)->fb = 0;
                 return 1;
@@ -296,7 +262,7 @@ int Retira(TArvBin *p, TChave c)
         { // possui dois filhos
             if (Sucessor(&q, &q->Dir))
                 switch ((*p)->fb)
-                { // subarvore direita encolheu
+                {
                 case -1:
                     (*p)->fb = 0;
                     ret = 1;
@@ -323,7 +289,7 @@ int Sucessor(TArvBin *q, TArvBin *r)
     {
         if (Sucessor(q, &(*r)->Esq))
             switch ((*r)->fb)
-            { // subarvore esquerda encolheu
+            {
             case +1:
                 (*r)->fb = 0;
                 return 1;

@@ -8,7 +8,6 @@
 // GLOBAL    //
 ///////////////
 unsigned int counter_comparacao = 0;
-unsigned int counter_movimentacao = 0;
 
 ///////////////
 // ALGORITMO //
@@ -33,9 +32,28 @@ typedef struct SNo
     int fb; // fator de balanceamento: -1, 0, +1
 } TNo;
 
-////////////////////
-// FUNÇÕES AUXILIARES //
-///////////////////////
+/* Procedimentos e funções da AVL */
+
+TArvBin Inicializa();
+int Altura(TArvBin No);
+int FB(TArvBin No);
+void LL(TArvBin *pA);
+void RR(TArvBin *pA);
+void LR(TArvBin *pA);
+void RL(TArvBin *pA);
+int BalancaEsquerda(TArvBin *pNo);
+int BalancaDireita(TArvBin *pNo);
+int BalancaNo(TArvBin *pNo);
+int Insere(TArvBin *pNo, TItem x);
+int Retira(TArvBin *p, TChave c);
+int Busca(TArvBin No, TChave c);
+int Sucessor(TArvBin *q, TArvBin *r);
+
+/* Inicia uma árvore AVL vazia */
+TArvBin Inicializa()
+{
+    return NULL;
+}
 
 int Altura(TArvBin No)
 {
@@ -44,7 +62,7 @@ int Altura(TArvBin No)
         return -1; // altura de árvore vazia é -1
     hEsq = Altura(No->Esq);
     hDir = Altura(No->Dir);
-    return hEsq > hDir ? hEsq + 1 : hDir + 1;
+    return (hEsq > hDir) ? hEsq + 1 : hDir + 1;
 }
 
 int FB(TArvBin No)
@@ -59,8 +77,16 @@ void LL(TArvBin *pA)
     TArvBin pB = (*pA)->Esq;
     (*pA)->Esq = pB->Dir;
     pB->Dir = *pA;
-    (*pA)->fb = 0;
-    pB->fb = 0;
+    if (pB->fb == 0)
+    {
+        (*pA)->fb = +1;
+        pB->fb = -1;
+    }
+    else
+    {
+        (*pA)->fb = 0;
+        pB->fb = 0;
+    }
     *pA = pB;
 }
 
@@ -69,8 +95,16 @@ void RR(TArvBin *pA)
     TArvBin pB = (*pA)->Dir;
     (*pA)->Dir = pB->Esq;
     pB->Esq = *pA;
-    (*pA)->fb = 0;
-    pB->fb = 0;
+    if (pB->fb == 0)
+    {
+        (*pA)->fb = -1;
+        pB->fb = +1;
+    }
+    else
+    {
+        (*pA)->fb = 0;
+        pB->fb = 0;
+    }
     *pA = pB;
 }
 
@@ -164,12 +198,9 @@ int BalancaNo(TArvBin *pNo)
     return 0;
 }
 
-/////////////////////////
-// OPERAÇÕES PRINCIPAIS //
-/////////////////////////
-
 int Insere(TArvBin *pNo, TItem x)
 {
+    counter_comparacao++; // Incrementa comparação
     if (*pNo == NULL)
     {
         *pNo = (TArvBin)malloc(sizeof(TNo));
@@ -181,9 +212,7 @@ int Insere(TArvBin *pNo, TItem x)
     }
     else if (x.Chave < (*pNo)->Item.Chave)
     {
-        counter_comparacao++;
         if (Insere(&(*pNo)->Esq, x))
-        {
             switch ((*pNo)->fb)
             {
             case -1:
@@ -195,14 +224,11 @@ int Insere(TArvBin *pNo, TItem x)
             case +1:
                 return !BalancaEsquerda(pNo);
             }
-        }
         return 0;
     }
     else if (x.Chave > (*pNo)->Item.Chave)
     {
-        counter_comparacao++;
         if (Insere(&(*pNo)->Dir, x))
-        {
             switch ((*pNo)->fb)
             {
             case +1:
@@ -214,75 +240,22 @@ int Insere(TArvBin *pNo, TItem x)
             case -1:
                 return !BalancaDireita(pNo);
             }
-        }
         return 0;
     }
     else
-    {
-        return 0; // retorna 0 caso o item já esteja na árvore
-    }
-}
-
-TArvBin PesquisaAVL(TArvBin raiz, TChave chave)
-{
-    while (raiz != NULL)
-    {
-        counter_comparacao++;
-        if (chave < raiz->Item.Chave)
-        {
-            raiz = raiz->Esq;
-            counter_movimentacao++; // Movimentação ao descer para a esquerda
-        }
-        else if (chave > raiz->Item.Chave)
-        {
-            raiz = raiz->Dir;
-            counter_movimentacao++; // Movimentação ao descer para a direita
-        }
-        else
-            return raiz;
-    }
-    return NULL;
-}
-
-int Sucessor(TArvBin *q, TArvBin *r)
-{
-    if ((*r)->Esq != NULL)
-    {
-        if (Sucessor(q, &(*r)->Esq))
-            switch ((*r)->fb)
-            { // subarvore esquerda encolheu
-            case +1:
-                (*r)->fb = 0;
-                return 1;
-            case 0:
-                (*r)->fb = -1;
-                return 0;
-            case -1:
-                return BalancaDireita(r);
-            }
-        return 0;
-    }
-    else
-    {
-        (*q)->Item = (*r)->Item;
-        *q = *r;
-        *r = (*r)->Dir;
-        counter_movimentacao++;
-        return 1;
-    }
+        return 0; // retorna 0 caso o item já estiver na árvore
 }
 
 int Retira(TArvBin *p, TChave c)
 {
+    counter_comparacao++; // Incrementa comparação
     TArvBin q;
     int ret;
     if (*p == NULL)
         return 0; // retorna 0 caso o item não esteja na árvore
     else if (c < (*p)->Item.Chave)
     {
-        counter_comparacao++;
         if (Retira(&(*p)->Esq, c))
-        {
             switch ((*p)->fb)
             {
             case +1:
@@ -294,14 +267,11 @@ int Retira(TArvBin *p, TChave c)
             case -1:
                 return BalancaDireita(p);
             }
-        }
         return 0;
     }
     else if (c > (*p)->Item.Chave)
     {
-        counter_comparacao++;
         if (Retira(&(*p)->Dir, c))
-        {
             switch ((*p)->fb)
             {
             case -1:
@@ -313,63 +283,86 @@ int Retira(TArvBin *p, TChave c)
             case +1:
                 return BalancaEsquerda(p);
             }
-        }
         return 0;
     }
     else
     {
         q = *p;
-        if (q->Dir == NULL)
-        {
-            *p = q->Esq;
-            ret = 1;
-        }
-        else if (q->Esq == NULL)
+        if (q->Esq == NULL)
         {
             *p = q->Dir;
             ret = 1;
         }
+        else if (q->Dir == NULL)
+        {
+            *p = q->Esq;
+            ret = 1;
+        }
         else
         {
-            if (Sucessor(&q, &q->Dir))
-            {
+            ret = Sucessor(&q, &q->Esq);
+            if (ret)
                 switch ((*p)->fb)
                 {
-                case -1:
-                    (*p)->fb = 0;
-                    ret = 1;
-                    break;
-                case 0:
-                    (*p)->fb = +1;
-                    ret = 0;
-                    break;
                 case +1:
-                    ret = BalancaEsquerda(p);
-                    break;
+                    (*p)->fb = 0;
+                    return 1;
+                case 0:
+                    (*p)->fb = -1;
+                    return 0;
+                case -1:
+                    return BalancaDireita(p);
                 }
-            }
-            else
-                ret = 0;
         }
         free(q);
         return ret;
     }
 }
 
-void Central(TArvBin p)
+int Sucessor(TArvBin *q, TArvBin *r)
 {
-    if (p != NULL)
+    int ret;
+    if ((*r)->Dir != NULL)
     {
-        Central(p->Esq);
-        printf("%d ", p->Item.Chave);
-        Central(p->Dir);
+        if (Sucessor(q, &(*r)->Dir))
+            switch ((*r)->fb)
+            {
+            case -1:
+                (*r)->fb = 0;
+                return 1;
+            case 0:
+                (*r)->fb = +1;
+                return 0;
+            case +1:
+                return BalancaEsquerda(r);
+            }
+        return 0;
+    }
+    else
+    {
+        (*q)->Item = (*r)->Item;
+        *q = *r;
+        *r = (*r)->Esq;
+        return 1;
     }
 }
 
-/////////////////
-// FUNÇÃO MAIN //
-/////////////////
+int Busca(TArvBin No, TChave c)
+{
+    counter_comparacao++; // Incrementa comparação
+    if (No == NULL)
+        return 0;
+    else if (c < No->Item.Chave)
+        return Busca(No->Esq, c);
+    else if (c > No->Item.Chave)
+        return Busca(No->Dir, c);
+    else
+        return 1;
+}
 
+////////////////
+//    MAIN    //
+////////////////
 int main(int argc, char *argv[])
 {
     clock_t start, end;
@@ -390,57 +383,67 @@ int main(int argc, char *argv[])
     point = selecionarArray(seletor_modo, seletor_qtde);
     N_array = getTamanhoArray(seletor_qtde);
 
-    // Inicializar raiz da AVL
-    TArvBin Raiz = NULL;
+    // Inicializar árvore AVL
+    TArvBin arvoreAVL = Inicializa();
 
-    // Inserir elementos na AVL
+    // Rodar algoritmo de inserção na árvore AVL
     start = clock();
     for (int i = 0; i < N_array; i++)
     {
         TItem item;
         item.Chave = point[i];
-        Insere(&Raiz, item);
+        Insere(&arvoreAVL, item);
     }
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de inserção
-    printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u; REGIS_INSERCAO=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_INSERCAO=%f; COMP_INSERCAO=%u; REGIS_INSERCAO=%u\n", cpu_time_used, counter_comparacao);
 
-    // Resetar contadores para busca
+    // Imprimir estado da árvore AVL após inserção
+    // printf("Arvore AVL apos insercao: ");
+    // printAVL(arvoreAVL);
+    // printf("\n");
+
+    // Reset counters for search
     counter_comparacao = 0;
-    counter_movimentacao = 0;
 
-    // Realizar busca na AVL
+    // Rodar algoritmo de busca na árvore AVL
     start = clock();
     for (int i = 0; i < N_array; i++)
     {
-        PesquisaAVL(Raiz, point[i]);
+        TChave chave = point[i];
+        Busca(arvoreAVL, chave);
     }
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-    // Plotar resultados da busca
-    printf("TEMPO_BUSCA=%f; COMP_BUSCA=%u; REGIS_BUSCA=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    // Plotar resultados de busca
+    printf("TEMPO_BUSCA=%f; COMP_BUSCA=%u; REGIS_BUSCA=%u\n", cpu_time_used, counter_comparacao);
 
     // Reset counters for delete
     counter_comparacao = 0;
-    counter_movimentacao = 0;
 
     // Rodar algoritmo de remoção na árvore AVL
     start = clock();
     for (int i = 0; i < N_array; i++)
     {
-        Retira(&Raiz, point[i]);
+        TChave chave = point[i];
+        Retira(&arvoreAVL, chave);
     }
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     // Plotar resultados de remoção
-    printf("TEMPO_REMOCAO=%f; COMP_REMOCAO=%u; REGIS_REMOCAO=%u\n", cpu_time_used, counter_comparacao, counter_movimentacao);
+    printf("TEMPO_REMOCAO=%f; COMP_REMOCAO=%u\n", cpu_time_used, counter_comparacao);
+
+    // Imprimir estado da árvore AVL após remoção
+    // printf("Arvore AVL apos remocao: ");
+    // printAVL(arvoreAVL);
+    // printf("\n");
 
     // Liberar memória
-    free(Raiz);
+    free(arvoreAVL);
 
     return 0;
 }
