@@ -1,0 +1,176 @@
+
+ordenada 1e1  
+TEMPO_INSERCAO: 0.0 e std:0.0 
+COMP_INSERCAO: 45.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.0 e std:0.0 
+COMP_BUSCA: 45.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+ordenada 1e2  
+TEMPO_INSERCAO: 8e-05 e std:0.0002712931993250107 
+COMP_INSERCAO: 4950.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 2e-05 e std:0.00014000000000000001 
+COMP_BUSCA: 4950.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+ordenada 1e3  
+TEMPO_INSERCAO: 0.0023200000000000004 e std:0.0008588364221433554 
+COMP_INSERCAO: 499500.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.0019000000000000006 e std:0.000714142842854285 
+COMP_BUSCA: 499500.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 5e-05 e std:0.0002179449471770337 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+ordenada 1e4  
+TEMPO_INSERCAO: 0.17247 e std:0.012479947916557982 
+COMP_INSERCAO: 49995000.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.1556 e std:0.021470910553583886 
+COMP_BUSCA: 49995000.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.00030000000000000003 e std:0.00045825756949558405 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+inversa 1e1  
+TEMPO_INSERCAO: 1e-05 e std:9.9498743710662e-05 
+COMP_INSERCAO: 45.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.0 e std:0.0 
+COMP_BUSCA: 45.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+inversa 1e2  
+TEMPO_INSERCAO: 9e-05 e std:0.00028618176042508373 
+COMP_INSERCAO: 4950.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.0 e std:0.0 
+COMP_BUSCA: 4950.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+inversa 1e3  
+TEMPO_INSERCAO: 0.00204 e std:0.0007472616676907762 
+COMP_INSERCAO: 499500.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.00135 e std:0.0007664854858377945 
+COMP_BUSCA: 499500.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 5e-05 e std:0.0002179449471770337 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+inversa 1e4  
+TEMPO_INSERCAO: 0.17177999999999996 e std:0.025708201026131725 
+COMP_INSERCAO: 49995000.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.14676000000000003 e std:0.027544189949969485 
+COMP_BUSCA: 49995000.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.00036 e std:0.0005003998401278721 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+quase 1e1  
+TEMPO_INSERCAO: 0.0 e std:0.0 
+COMP_INSERCAO: 27.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.0 e std:0.0 
+COMP_BUSCA: 27.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 7.0 e std:0.0 
+------------------
+
+quase 1e2  
+TEMPO_INSERCAO: 0.00010000000000000002 e std:0.0003 
+COMP_INSERCAO: 1846.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 1e-05 e std:9.9498743710662e-05 
+COMP_BUSCA: 1846.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 2e-05 e std:0.00014000000000000001 
+COMP_REMOCAO: 111.0 e std:0.0 
+------------------
+
+quase 1e3  
+TEMPO_INSERCAO: 0.00026000000000000003 e std:0.00043863424398922615 
+COMP_INSERCAO: 29522.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.00024 e std:0.00047159304490206386 
+COMP_BUSCA: 29522.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.00012 e std:0.00035440090293338696 
+COMP_REMOCAO: 4373.0 e std:0.0 
+------------------
+
+quase 1e4  
+TEMPO_INSERCAO: 0.004719999999999999 e std:0.0007493997598078078 
+COMP_INSERCAO: 659687.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.0032000000000000006 e std:0.0009273618495495705 
+COMP_BUSCA: 659687.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0016600000000000005 e std:0.0006359245238233859 
+COMP_REMOCAO: 72593.0 e std:0.0 
+------------------
+
+aleatoria 1e1  
+TEMPO_INSERCAO: 0.0 e std:0.0 
+COMP_INSERCAO: 31.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.0 e std:0.0 
+COMP_BUSCA: 31.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 9.0 e std:0.0 
+------------------
+
+aleatoria 1e2  
+TEMPO_INSERCAO: 7.000000000000001e-05 e std:0.0002551470164434615 
+COMP_INSERCAO: 594.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 1e-05 e std:9.9498743710662e-05 
+COMP_BUSCA: 594.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 351.0 e std:0.0 
+------------------
+
+aleatoria 1e3  
+TEMPO_INSERCAO: 0.00034 e std:0.0004943682837723311 
+COMP_INSERCAO: 11670.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 6e-05 e std:0.00023748684174075836 
+COMP_BUSCA: 11670.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.00017 e std:0.0004255584566190642 
+COMP_REMOCAO: 8125.0 e std:0.0 
+------------------
+
+aleatoria 1e4  
+TEMPO_INSERCAO: 0.0035600000000000002 e std:0.0009414881836751855 
+COMP_INSERCAO: 149674.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 0.0020700000000000007 e std:0.0007906326580656784 
+COMP_BUSCA: 149674.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0024500000000000004 e std:0.0009313968005098579 
+COMP_REMOCAO: 118616.0 e std:0.0 
+------------------
