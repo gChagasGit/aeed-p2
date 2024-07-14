@@ -1,0 +1,44 @@
+
+ordenada 1e6  
+TEMPO_INSERCAO: 0.111 e std:0.0 
+COMP_INSERCAO: 0.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 81.955 e std:0.0 
+COMP_BUSCA: 695645902.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+inversa 1e6  
+TEMPO_INSERCAO: 159.142 e std:0.0 
+COMP_INSERCAO: 0.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 71.38 e std:0.0 
+COMP_BUSCA: 764098613.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+quase 1e6  
+TEMPO_INSERCAO: 2.706 e std:0.0 
+COMP_INSERCAO: 0.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 73.4 e std:0.0 
+COMP_BUSCA: 698246751.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
+
+aleatoria 1e6  
+TEMPO_INSERCAO: 108.465 e std:0.0 
+COMP_INSERCAO: 0.0 e std:0.0 
+------------------
+TEMPO_BUSCA: 109.742 e std:0.0 
+COMP_BUSCA: 724919016.0 e std:0.0 
+------------------
+TEMPO_REMOCAO: 0.0 e std:0.0 
+COMP_REMOCAO: 0.0 e std:0.0 
+------------------
